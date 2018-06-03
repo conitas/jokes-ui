@@ -7,6 +7,10 @@ router.get('/heroes', (req, res) => {
   heroService.getHeroes(req, res);
 });
 
+router.get('/avatar', (req, res) => {
+  heroService.getAvatar(req, res);
+});
+
 router.post('/hero', (req, res) => {
   heroService.postHero(req, res);
 });

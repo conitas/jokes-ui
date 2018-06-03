@@ -8,8 +8,37 @@
   "private": true,
   "dependencies": {
     "body-parser": "^1.17.2",
+    "canvas": "~2.0.0-alpha.10",
+    "canvas-prebuilt": "~2.0.0-alpha.10",
     "express": "^4.15.3",
-    "mongoose": "^4.11.1"
+    "fs": "^0.0.1-security",
+    "identicon": "^2.1.2",
+    "mongoose": "^4.11.1",
+    "sanitize-filename": "^1.6.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "canvas-prebuilt": "2.0.0-alpha.12",
+    "depd": "1.1.2",
+    "http-errors": "1.6.3",
+    "iconv-lite": "0.4.23",
+    "qs": "6.5.2",
+    "raw-body": "2.3.3",
+    "setprototypeof": "1.1.0",
+    "statuses": "1.5.0",
+    "node-pre-gyp": "0.9.1",
+    "tar": "4.4.4",
+    "minimist": "1.2.0",
+    "readable-stream": "2.2.7",
+    "process-nextick-args": "2.0.0",
+    "safe-buffer": "5.1.2",
+    "string_decoder": "1.1.1",
+    "string-width": "2.1.1",
+    "strip-ansi": "4.0.0",
+    "is-fullwidth-code-point": "2.0.0",
+    "ansi-regex": "3.0.0",
+    "assert-plus": "1.0.0",
+    "extsprintf": "1.3.0",
+    "sliced": "1.0.1"
+  }
 }

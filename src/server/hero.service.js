@@ -1,5 +1,8 @@
 const Hero = require('./hero.model');
 const ReadPreference = require('mongodb').ReadPreference;
+const identicon = require('identicon');
+const fs = require('fs');
+const sanitize = require("sanitize-filename");
 
 require('./mongo').connect();
 
@@ -74,9 +77,27 @@ function checkFound(res, hero) {
   return hero;
 }
 
+function getAvatar(req, res){
+  const hero = {
+    name: req.body.name
+    };
+    const filename = __dirname + '/'+sanitize(hero.name)+'.png';
+    if(!fs.exists(filename)){
+    // Asynchronous API
+    identicon.generate({ id: 'ajido', size: 150 }, function(err, buffer) {
+        if (err) throw err;
+     
+        // buffer is identicon in PNG format.
+        fs.writeFileSync(filename, buffer);
+    });
+  }
+    return filename;
+}
+
 module.exports = {
   getHeroes,
   postHero,
   putHero,
-  deleteHero
+  deleteHero,
+  getAvatar
 };
