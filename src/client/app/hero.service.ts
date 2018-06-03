@@ -13,6 +13,10 @@ export class HeroService {
     return this.http.get<Array<Hero>>(`${api}/heroes`)
   }
 
+  getAvatar(hero: Hero) {
+    return this.http.get<string>(`${api}/avatar/${hero.name}`);
+  }
+
   deleteHero(hero: Hero) {
     return this.http.delete(`${api}/hero/${hero.id}`);
   }
