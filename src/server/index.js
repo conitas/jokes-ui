@@ -1,9 +1,18 @@
+import {useProxy} from "./env/environment";
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
+const publicweb = require('./hero.service').publicweb;
 
-const publicweb = './dist/publicweb';
 const app = express();
+
+// enable proxy for joke service
+if(useProxy) {
+const proxy = require('http-proxy-middleware');
+const apiProxy = proxy('/jokes', {target: 'http://localhost:8080/'});
+  app.use(apiProxy);
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,3 +27,5 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || '3000';
 app.listen(port, () => console.log(`API running on localhost:${port}`));
+
+

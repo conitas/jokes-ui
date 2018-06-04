@@ -2,8 +2,8 @@
   <ul class="heroes">
     <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
       <button class="delete-button" (click)="deleteHero(hero)">Delete</button>
+      <div style="float:left"><img [src]="getAvatar(hero)"/></div>
       <div class="hero-element">
-          {{getAvatar(hero)}}
         <div class="badge">{{hero.id}}</div>
         <div class="name">{{hero.name}}</div>
         <div class="saying">{{hero.saying}}</div>
@@ -31,5 +31,12 @@
       <button (click)="cancel()">Cancel</button>
       <button (click)="save()">Save</button>
     </div>
+    <ul class="jokes">
+      <li *ngFor="let joke of jokes">
+        <img [src]="getAvatarForJoke(joke)"/>
+        {{joke.server}} {{joke.joke}}
+      </li>
+    </ul>
   </div>
+
 </div>
