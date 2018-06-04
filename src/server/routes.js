@@ -7,7 +7,7 @@ router.get('/heroes', (req, res) => {
   heroService.getHeroes(req, res);
 });
 
-router.get('/avatar', (req, res) => {
+router.get('/avatar/:name', (req, res) => {
   heroService.getAvatar(req, res);
 });
 

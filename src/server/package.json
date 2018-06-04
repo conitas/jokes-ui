@@ -8,8 +8,7 @@
   "private": true,
   "dependencies": {
     "body-parser": "^1.17.2",
-    "canvas": "~2.0.0-alpha.10",
-    "canvas-prebuilt": "~2.0.0-alpha.10",
+    "canvas-prebuilt": "^1.6.5-prerelease.1",
     "express": "^4.15.3",
     "fs": "^0.0.1-security",
     "identicon": "^2.1.2",
@@ -18,7 +17,6 @@
   },
   "devDependencies": {},
   "resolutions": {
-    "canvas-prebuilt": "2.0.0-alpha.12",
     "depd": "1.1.2",
     "http-errors": "1.6.3",
     "iconv-lite": "0.4.23",
@@ -39,6 +37,8 @@
     "ansi-regex": "3.0.0",
     "assert-plus": "1.0.0",
     "extsprintf": "1.3.0",
-    "sliced": "1.0.1"
+    "sliced": "1.0.1",
+    "body-parser": "1.18.3",
+    "canvas-prebuilt": "1.6.5-prerelease.1"
   }
 }
