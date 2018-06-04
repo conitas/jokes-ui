@@ -3,8 +3,9 @@ const ReadPreference = require('mongodb').ReadPreference;
 const identicon = require('identicon');
 const fs = require('fs');
 const sanitize = require("sanitize-filename");
-
+const publicweb = './dist/publicweb';
 require('./mongo').connect();
+const crypto = require('crypto');
 
 function getHeroes(req, res) {
   const docquery = Hero.find({}).read(ReadPreference.NEAREST);
@@ -15,7 +16,6 @@ function getHeroes(req, res) {
     })
     .catch(error => {
       res.status(500).send(error);
-      return;
     });
 }
 
@@ -78,21 +78,27 @@ function checkFound(res, hero) {
 }
 
 function getAvatar(req, res){
-  const hero = {
-    name: req.params.name
-    };
-    console.log(hero);
-    const filename = __dirname + '/'+sanitize(hero.name)+'.png';
-    if(!fs.existsSync(filename)){
+  const avatardir = publicweb + '/avatar/';
+  if (!fs.existsSync(avatardir)) {
+    fs.mkdirSync(avatardir);
+  }
+
+  const name = req.params.name;
+
+  console.log(name);
+  const filename = '/avatar/' + sanitize(name) + '.png';
+
+  if (!fs.existsSync(publicweb + filename)) {
     // Asynchronous API
-    identicon.generate({ id: hero.name, size: 150 }, function(err, buffer) {
-        if (err) checkServerError(err,res);
-     
+    identicon.generate({id: crypto.createHash('SHA512').update(name).digest(), size: 50}, function (err, buffer) {
+      if (err) checkServerError(err, res);
+
         // buffer is identicon in PNG format.
-        fs.writeFileSync(filename, buffer);
+      fs.writeFileSync(publicweb + filename, buffer);
     });
   }
-   res.status(200).json(filename);
+  res.status(200).json(filename);
+
 }
 
 module.exports = {
@@ -100,5 +106,6 @@ module.exports = {
   postHero,
   putHero,
   deleteHero,
-  getAvatar
+  getAvatar,
+  publicweb
 };
