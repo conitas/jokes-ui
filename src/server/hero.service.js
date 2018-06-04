@@ -79,19 +79,20 @@ function checkFound(res, hero) {
 
 function getAvatar(req, res){
   const hero = {
-    name: req.body.name
+    name: req.params.name
     };
+    console.log(hero);
     const filename = __dirname + '/'+sanitize(hero.name)+'.png';
-    if(!fs.exists(filename)){
+    if(!fs.existsSync(filename)){
     // Asynchronous API
-    identicon.generate({ id: 'ajido', size: 150 }, function(err, buffer) {
-        if (err) throw err;
+    identicon.generate({ id: hero.name, size: 150 }, function(err, buffer) {
+        if (err) checkServerError(err,res);
      
         // buffer is identicon in PNG format.
         fs.writeFileSync(filename, buffer);
     });
   }
-    return filename;
+   res.status(200).json(filename);
 }
 
 module.exports = {

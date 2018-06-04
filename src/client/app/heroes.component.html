@@ -3,7 +3,7 @@
     <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
       <button class="delete-button" (click)="deleteHero(hero)">Delete</button>
       <div class="hero-element">
-        <img class="" src="{{heroService.getAvatar(hero)}}"></img>
+          {{getAvatar(hero)}}
         <div class="badge">{{hero.id}}</div>
         <div class="name">{{hero.name}}</div>
         <div class="saying">{{hero.saying}}</div>

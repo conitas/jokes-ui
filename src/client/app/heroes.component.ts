@@ -11,10 +11,8 @@ export class HeroesComponent implements OnInit {
   addingHero = false;
   heroes: any = [];
   selectedHero: Hero;
-  heroService: HeroService;
-
-  constructor(heroService: HeroService) {
-    this.heroService = heroService;
+  
+  constructor(private heroService: HeroService) {
   }
 
   ngOnInit() {
@@ -39,6 +37,12 @@ export class HeroesComponent implements OnInit {
     return this.heroService.getHeroes().subscribe(heroes => {
       this.heroes = heroes;
     });
+  }
+
+  getAvatar(hero: Hero) {
+    return this.heroService.getAvatar(hero).subscribe(avatar => {
+      return avatar;
+    }).unsubscribe();
   }
 
   enableAddMode() {
