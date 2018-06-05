@@ -30,6 +30,7 @@ RUN apt-get update \
 WORKDIR /usr/src/app
 COPY --from=express-server /app /usr/src/app
 COPY --from=angular-app /app/dist /usr/src/app
+RUN mkdir -p /usr/src/app/dist && ln -s /usr/src/app/publicweb /usr/src/app/dist/publicweb
 ENV PORT 80
 #ENV API_URL we-could-set-this-here-as-default
 CMD [ "node", "index.js" ]
