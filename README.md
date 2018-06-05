@@ -1,3 +1,44 @@
+
+# Modification for Demo purposes
+
+Current repo is the modification of the repo made by by [John Papa](http://twitter.com/john_papa) to demonstrate the consume of another one external rest services.
+
+
+The best way to test the app is to build and run a docker image. The current one can be obtained from docker.io:
+
+ ```
+  docker pull itasgmbhde/jokes-ui
+ ```
+
+## Building the app
+
+ ```bash
+   docker build -t itasgmbhde/jokes-ui .
+ ```
+
+## Running the app
+
+ ```
+ docker run -it --rm -p 8080:80 -e "APPSETTING_cosmosPort=10255"  -e "APPSETTING_dbName=<databaseName>" -e "APPSETTING_key=<databasekey>" -e "APPSETTING_useProxy=<true|false>"  itasgmbhde/jokes-ui
+ ```
+ 
+## Environment Variables
+Variables are prefixed by APPSETTING_ because the naming conventions of Azure Webapps
+
+Variable | Usage | Sample value
+--- | --- | ---
+*cosmosPort* | Port | 10255 
+*dbName* | Cosmos DB/MongoDB Collection | heroes
+*key* | Database Password / Secret | xYzasfwewe12334==
+*useProxy* | Should node act as proxy to serve /jokes path? if true, it routes to localhost:8080, only for development | true 
+
+See also [https://github.com/itasgmbh/jokes](https://github.com/itasgmbh/jokes) for correspondig jokes microservice
+
+       
+=======
+       
+=======
+
 # Angular Cosmos DB
 
 by [John Papa](http://twitter.com/john_papa)
