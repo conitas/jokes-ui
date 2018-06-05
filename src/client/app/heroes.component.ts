@@ -16,14 +16,17 @@ export class HeroesComponent implements OnInit {
   heroes: any = [];
   selectedHero: Hero;
   jokes: Joke[] = [];
+  jokes_next: Joke[] = [];
+  jokes_next_count = 0;
   pollingData: any;
+  alternate: false;
 
   constructor(private heroService: HeroService) {
   }
 
   ngOnInit() {
     this.getHeroes();
-    this.pollingData = Observable.interval(3000).startWith(0).subscribe(() =>
+    this.pollingData = Observable.interval(4000).startWith(0).subscribe(() =>
       this.heroService.getRandomJoke(Math.floor((Math.random() * 5) + 1)).pipe(
         map(result => {
           result.jokes.forEach(joke => joke.server = result.server);
@@ -31,9 +34,11 @@ export class HeroesComponent implements OnInit {
         }))
         .subscribe(result => {
           console.log(result);
-          this.jokes.push(...result);
-          if (this.jokes.length > 10) {
-            this.jokes = this.jokes.slice(-10);
+          this.jokes.unshift(...this.jokes_next);
+          this.jokes_next_count = result.length;
+          this.jokes_next = result;
+          if (this.jokes.length > 10 + this.jokes_next_count) {
+            this.jokes = this.jokes.slice(0, 10 + this.jokes_next_count);
           }
         }));
   }

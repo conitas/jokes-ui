@@ -50,18 +50,17 @@ div {
 }
 
 .heroes {
-  float: left;
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
   li {
+    list-style-type: none;
     cursor: pointer;
     position: relative;
     left: 0;
     background-color: #eee;
     margin: .5em;
     padding: .5em;
-    height: 3.0em;
     border-radius: 4px;
     width: 17em;
     &:hover {
@@ -136,6 +135,7 @@ input {
 }
 
 .editarea {
+  max-width: 70%;
   float: left;
   input {
     margin: 4px;
@@ -147,5 +147,30 @@ input {
   }
   .editfields {
     margin-left: 12px;
+  }
+}
+
+ul.jokes {
+  max-width: 60%;
+  float: left;
+  list-style-type: none;
+  .joke {
+    transition: all 5s;
+    color: #888;
+    opacity: 1;
+    border: 3px #f0f8f3;
+    padding: 3px;
+    border-radius: 10px;
+    border-style: inset;
+    margin-bottom: 5px;
+    &.fadeout {
+      color: white;
+      opacity: 0;
+    }
+    span {
+      display: inline-block;
+      vertical-align: top;
+      max-width: 90%;
+    }
   }
 }
