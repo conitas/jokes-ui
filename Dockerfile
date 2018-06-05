@@ -1,21 +1,22 @@
 # Angular App ========================================
-FROM johnpapa/angular-cli as angular-app
+FROM node:alpine as angular-app
 LABEL authors="Shayne Boyer, John Papa"
+RUN npm install -g @angular/cli
 # Copy and install the Angular app
 WORKDIR /app
 COPY package.json /app
-RUN npm install
 COPY . /app
+RUN npm install
 RUN ng build --prod
 
 #Express server =======================================
-FROM node:6.11-alpine as express-server
+FROM node:alpine as express-server
 WORKDIR /app
 COPY /src/server /app
 RUN npm install --production --silent
 
 #Final image ========================================
-FROM node:6.11-alpine
+FROM node:alpine
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY --from=express-server /app /usr/src/app
