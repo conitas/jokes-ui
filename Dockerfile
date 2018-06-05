@@ -6,14 +6,15 @@ RUN npm install -g @angular/cli
 WORKDIR /app
 COPY package.json /app
 COPY . /app
-RUN npm install
-RUN ng build --prod
+RUN npm install yarn && yarn install
+RUN mkdir -p /app/dist/publicweb && yarn run build --prod
 
 #Express server =======================================
 FROM node:alpine as express-server
 WORKDIR /app
 COPY /src/server /app
-RUN npm install --production --silent
+RUN npm install yarn
+RUN yarn install  --production --silent
 
 #Final image ========================================
 FROM node:alpine

@@ -1,4 +1,4 @@
-import {useProxy} from "./env/environment";
+const useProxy = require('./env/environment').useProxy;
 
 const express = require('express');
 const bodyParser = require('body-parser');
