@@ -26,8 +26,8 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit() {
     this.getHeroes();
-    this.pollingData = Observable.interval(4000).startWith(0).subscribe(() =>
-      this.heroService.getRandomJoke(Math.floor((Math.random() * 5) + 1)).pipe(
+    this.pollingData = Observable.interval(2000).startWith(0).subscribe(() =>
+      this.heroService.getRandomJoke(Math.floor((Math.random() * 3) + 1)).pipe(
         map(result => {
           result.jokes.forEach(joke => joke.server = result.server);
           return result.jokes;
