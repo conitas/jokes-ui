@@ -90,15 +90,16 @@ function getAvatar(req, res){
 
   if (!fs.existsSync(publicweb + filename)) {
     // Asynchronous API
-    identicon.generate({id: crypto.createHash('SHA512').update(name).digest(), size: 50}, function (err, buffer) {
+    identicon.generate({id: crypto.createHash('SHA512').update(filename).digest(), size: 50}, function (err, buffer) {
       if (err) checkServerError(err, res);
 
         // buffer is identicon in PNG format.
       fs.writeFileSync(publicweb + filename, buffer);
+      res.status(200).json(filename);
     });
+  } else {
+    res.status(200).json(filename);
   }
-  res.status(200).json(filename);
-
 }
 
 module.exports = {
